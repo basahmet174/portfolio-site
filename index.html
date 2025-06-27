@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ahmet Baş</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #1a1a2e;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 20px;
+      z-index: 10;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    header nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    header nav a:hover {
+      text-decoration: underline;
+    }
+
+    #baslikAlani {
+      text-align: center;
+      margin-top: 140px;
+      margin-bottom: 60px;
+    }
+
+    #baslikAlani h1 {
+      font-size: 36px;
+      margin: 0;
+    }
+
+    #baslikAlani p {
+      font-size: 18px;
+      color: #555;
+    }
+
+    #kaydir {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto 60px;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    #kaydir img {
+      width: 100%;
+      display: none;
+    }
+
+    #kaydir img.aktif {
+      display: block;
+    }
+
+    section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      border-radius: 12px;
+    }
+
+    #hakkimda {
+      background: #f5f5f5;
+    }
+
+    #portfolyo {
+      background: #f5f5f5;
+    }
+
+    section h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .projeler {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .projeler div {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      background: #1a1a2e;
+      color: #fff;
+      text-align: center;
+      padding: 40px;
+      margin-top: 60px;
+    }
+
+    .pencere {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background: rgba(0,0,0,0.8);
+    }
+
+    .pencere-icerik {
+      margin: 5% auto;
+      display: block;
+      max-width: 80%;
+      border-radius: 8px;
+    }
+
+    .kapat {
+      position: absolute;
+      top: 30px;
+      right: 50px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="#hakkimda">Hakkımda</a>
+      <a href="#portfolyo">Portfolyo</a>
+      <a href="#iletisim">İletişim</a>
+    </nav>
+  </header>
+
+  <section id="baslikAlani">
+    <h1>Ahmet Baş</h1>
+    <p>Markalara yaratıcı, sade ve işlevsel tasarımlar sunarım.</p>
+  </section>
+
+  <section id="kaydir">
+    <img src="whiskful.jpg" class="aktif" alt="Slider 1" />
+    <img src="bloom.jpg" alt="Slider 2" />
+    <img src="nightbrew.jpg" alt="Slider 3" />
+    <img src="cravebites.jpg" alt="Slider 4" />
+  </section>
+
+  <section id="hakkimda">
+    <h2>Hakkımda</h2>
+    <p>Ben Ahmet Baş. Grafik tasarım alanında sade, estetik ve modern işler üretirim. Markalara işlevsel ve yaratıcı çözümler sunarak projeler geliştiriyorum.</p>
+  </section>
+
+  <section id="portfolyo">
+    <h2>Portfolyo</h2>
+    <div class="projeler">
+      <div style="background-image: url('cravebites-kutu.jpg');" onclick="pencereAc('cravebites-kutu.jpg')"></div>
+      <div style="background-image: url('whiskful-chocolate.jpg');" onclick="pencereAc('whiskful-chocolate.jpg')"></div>
+      <div style="background-image: url('whiskful-vanilla.jpg');" onclick="pencereAc('whiskful-vanilla.jpg')"></div>
+      <div style="background-image: url('bloom-bar.jpg');" onclick="pencereAc('bloom-bar.jpg')"></div>
+    </div>
+  </section>
+
+  <footer id="iletisim">
+    İletişim: ahmetcanbas57600@gmail.com | Tel: 05447732392 | 
+    <a href="https://www.behance.net/arelcreative" style="color:#fff;">Behance</a>
+  </footer>
+
+  <div id="pencere" class="pencere">
+    <span class="kapat" onclick="pencereKapat()">&times;</span>
+    <img class="pencere-icerik" id="pencereResim" />
+  </div>
+
+  <script>
+    function pencereAc(src) {
+      document.getElementById('pencere').style.display = "block";
+      document.getElementById('pencereResim').src = src;
+    }
+
+    function pencereKapat() {
+      document.getElementById('pencere').style.display = "none";
+    }
+
+    let resimler = document.querySelectorAll("#kaydir img");
+    let sira = 0;
+    setInterval(() => {
+      resimler[sira].classList.remove('aktif');
+      sira = (sira + 1) % resimler.length;
+      resimler[sira].classList.add('aktif');
+    }, 3000);
+  </script>
+
+</body>
+</html>
